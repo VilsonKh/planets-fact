@@ -9,7 +9,14 @@
     <title>Planets fact site</title>
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
+    
+    <script src="https://code.jquery.com/jquery-3.6.3.slim.min.js" integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="module" src="countUp.js"  defer></script>
+    <script type='module' src="const.js" defer></script>
+    <script type="module" src="animation.js" defer></script>
     <script type="module" src="main.js" defer></script>
+  
   </head>
   <body>
     <div class="sky"></div>
@@ -24,14 +31,14 @@
             <span class="bars"></span>
           </div>
           <ul class="desktop-menu">
-            <li class="desktop-menu__item"><p>mercury</p></li>
-            <li class="desktop-menu__item"><p>venus</p></li>
-            <li class="desktop-menu__item"><p>earth</p></li>
-            <li class="desktop-menu__item"><p>mars</p></li>
-            <li class="desktop-menu__item"><p>jupiter</p></li>
-            <li class="desktop-menu__item"><p>saturn</p></li>
-            <li class="desktop-menu__item"><p>uranus</p></li>
-            <li class="desktop-menu__item"><p>neptune</p></li>
+            <li class="desktop-menu__item" data-planet="mercury">mercury</li>
+            <li class="desktop-menu__item" data-planet="venus">venus</li>
+            <li class="desktop-menu__item earth desktop-menu__active" data-planet="earth" >earth</li>
+            <li class="desktop-menu__item" data-planet="mars">mars</li>
+            <li class="desktop-menu__item" data-planet="jupiter">jupiter</li>
+            <li class="desktop-menu__item" data-planet="saturn">saturn</li>
+            <li class="desktop-menu__item" data-planet="uranus">uranus</li>
+            <li class="desktop-menu__item" data-planet="neptune">neptune</li>
           </ul>
         </div>
         <nav class="planet__links">
@@ -43,56 +50,56 @@
           <ul class="menu-burger">
             <li class="menu_item">
               <div class="name-container">
-                <span class="dot mercury"></span>
+                <span class="dot mercuryColor"></span>
                 <p class="item_name">mercury</p>
               </div>
               <img class="menu-arrow" src="img/icon-chevron.svg" alt="" />
             </li>
             <li class="menu_item">
               <div class="name-container">
-                <span class="dot venus"></span>
+                <span class="dot venusColor"></span>
                 <p class="item_name">venus</p>
               </div>
               <img class="menu-arrow" src="img/icon-chevron.svg" alt="" />
             </li>
             <li class="menu_item">
               <div class="name-container">
-                <span class="dot earth"></span>
+                <span class="dot earthColor"></span>
                 <p class="item_name">earth</p>
               </div>
               <img class="menu-arrow" src="img/icon-chevron.svg" alt="" />
             </li>
             <li class="menu_item">
               <div class="name-container">
-                <span class="dot mars"></span>
+                <span class="dot marsColor"></span>
                 <p class="item_name">mars</p>
               </div>
               <img class="menu-arrow" src="img/icon-chevron.svg" alt="" />
             </li>
             <li class="menu_item">
               <div class="name-container">
-                <span class="dot jupiter"></span>
+                <span class="dot jupiterColor"></span>
                 <p class="item_name">jupiter</p>
               </div>
               <img class="menu-arrow" src="img/icon-chevron.svg" alt="" />
             </li>
             <li class="menu_item">
               <div class="name-container">
-                <span class="dot saturn"></span>
+                <span class="dot saturnColor"></span>
                 <p class="item_name">saturn</p>
               </div>
               <img class="menu-arrow" src="img/icon-chevron.svg" alt="" />
             </li>
             <li class="menu_item">
               <div class="name-container">
-                <span class="dot uranus"></span>
+                <span class="dot uranusColor"></span>
                 <p class="item_name">uranus</p>
               </div>
               <img class="menu-arrow" src="img/icon-chevron.svg" alt="" />
             </li>
             <li class="menu_item">
               <div class="name-container">
-                <span class="dot neptune"></span>
+                <span class="dot neptuneColor"></span>
                 <p class="item_name">neptune</p>
               </div>
               <img class="menu-arrow" src="img/icon-chevron.svg" alt="" />
@@ -104,14 +111,14 @@
     <main class="main">
       <div class="planet-container">
         <img class="planet-img" src="img/planet-earth.svg" alt="" />
-        <img class="planet-img-geo" src="#" alt="" />
+        <img class="planet-img-geo" src="img/geology-earth.png" alt="" />
       </div>
       <section class="planet__section">
         <div class="planet__text">
           <h1 class="planet__title">earth</h1>
           <p class="planet__paragraph">
-            Third planet from the Sun and the only known planet to harbor life. About 29.2% of Earth's surface is land with remaining 70.8% is covered with water. Earth's distance from the Sun, physical
-            properties and geological history have allowed life to evolve and thrive.
+            Third planet from the Sun and the only known planet to harbor life. About 29.2% of Earth's surface is land with remaining 70.8% is covered with water. Earth's distance from the Sun,
+            physical properties and geological history have allowed life to evolve and thrive.
           </p>
           <div class="citation-container">
             <p class="planet__citation">
@@ -136,26 +143,28 @@
             </li>
           </ul>
         </div>
-      </main>
       </section>
-      <footer class="stats">
-        <div class="stat stat__rotation">
-          <p class="stat__name">ROTATION TIME</p>
-          <p class="stat__value rotation__value">1 Day</p>
-        </div>
-        <div class="stat stat__revolution">
-          <p class="stat__name">REVOLUTION TIME</p>
-          <p class="stat__value revolution__value">365 Days</p>
-        </div>
-        <div class="stat stat__radius">
-          <p class="stat__name">RADIUS</p>
-          <p class="stat__value radius__value">6,371 KM</p>
-        </div>
-        <div class="stat stat__temp">
-          <p class="stat__name">AVERAGE TEMP.</p>
-          <p class="stat__value radius__value">16°C</p>
-        </div>
-      </footer>
+    </main>
+    <footer class="stats">
+      <div class="stat stat__rotation">
+        <p class="stat__name">ROTATION TIME</p>
+        <p class="stat__value rotation__value">1 Day</p>
+      </div>
+      <div class="stat stat__revolution">
+        <p class="stat__name">REVOLUTION TIME</p>
+        <p class="stat__value revolution__value">365 Days</p>
+      </div>
+      <div class="stat stat__radius">
+        <p class="stat__name">RADIUS</p>
+        <p class="stat__value radius__value">6,371 KM</p>
+      </div>
+      <div class="stat stat__temp">
+        <p class="stat__name">AVERAGE TEMP.</p>
+        <p class="stat__value average__value">16°C</p>
+      </div>
+    </footer>
+
     
+   
   </body>
 </html>
