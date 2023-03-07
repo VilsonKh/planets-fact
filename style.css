@@ -5,6 +5,7 @@ body {
   font-size: 16px;
   line-height: 1.5rem;
   color: white;
+  min-width: 320px;
 }
 
 .sky {
@@ -30,8 +31,8 @@ body {
 
 .shootingstars > div {
   position: absolute;
-  background: linear-gradient(-45deg, white, rgba(0, 0, 255, 0));
-  transform: rotate(90deg);
+  background: linear-gradient(deg, white, rgba(0, 0, 255, 0));
+
   border-radius: 50%;
 }
 
@@ -52,6 +53,10 @@ body {
 
 .nav__mobile-burger {
   cursor: pointer;
+}
+
+.planet__paragraph{
+  height: 120px;
 }
 
 .bars {
@@ -86,7 +91,7 @@ main {
   text-transform: uppercase;
   font-size: 0.6rem;
   line-height: 0.6rem;
-  padding: 28px 2rem 23px;
+  padding: 15px 1rem 15px;
   opacity: 0.5;
   letter-spacing: 0.1rem;
   border-bottom: 5px solid transparent;
@@ -115,13 +120,13 @@ main {
   max-height: 46%;
 }
 
-  .planet-img-geo {
-    position: absolute;
-    top: 60%;
-    max-width: 25%;
-    width: 100%;
-    display: none;
-  }
+.planet-img-geo {
+  position: absolute;
+  top: 60%;
+  max-width: 25%;
+  width: 100%;
+  display: none;
+}
 
 .platet__section {
 }
@@ -200,6 +205,14 @@ main {
   padding-right: 1rem;
 }
 
+.value-container {
+  display: flex;
+}
+
+.value {
+  margin-right: 5px;
+}
+
 /* BURGER MENU */
 
 .menu-burger {
@@ -273,6 +286,32 @@ main {
   margin: 0 auto;
 }
 
+.animate__animated.animate__pulse {
+  --animate-duration: 0.5s;
+}
+
+.planetFlyOut{
+  animation: animateOut 0.3s linear forwards;
+} 
+
+.planetFlyIn{
+  animation: animateIn 0.3s linear forwards;
+}
+
+.fixedScroll {
+  overflow-y: hidden;
+}
+
+@keyframes animateOut {
+  0% {transform:rotate(0deg) translateY(0px) translateX(0px);opacity:1;filter:blur(1px);scale:1}
+  100% {transform: rotate(-45deg) translateY(-200px) translateX(1000px);opacity:0;filter: blur(20px);scale:0}
+}
+
+@keyframes animateIn {
+  0%{transform: rotate(45deg) translateY(250px);opacity: 0;filter: blur(5px);scale: 5;}
+  100%{transform: rotate(0deg) translateY(0px);opacity: 1;filter: blur(0px);scale: 1;}
+}
+
 @media (min-width: 610px) {
   .main {
     padding: 0 2.5rem;
@@ -293,6 +332,7 @@ main {
   .nav-container {
     display: flex;
     flex-direction: column;
+    padding: 25px 25px 0 25px;
   }
 
   .nav__logo {
@@ -362,7 +402,27 @@ main {
     display: block;
   }
 
-  .planet-container{position: relative;}
+  .planet-container {
+    position: relative;
+  }
+
+  /* .planetFlyOut{
+    animation: animateOut 0.3s linear forwards;
+  }
+
+  .planetFlyIn{
+    animation: animateIn 0.3s linear forwards;
+  }
+
+  @keyframes animateOut {
+    0% {transform:rotate(0deg) translateY(0px) translateX(0px);opacity:1;filter:blur(1px);scale:1}
+    100% {transform: rotate(-45deg) translateY(-1000px) translateX(-200px);opacity:0;filter: blur(20px);scale:0}
+  }
+
+  @keyframes animateIn {
+    0%{transform: rotate(45deg) translateY(250px);opacity: 0;filter: blur(5px);scale: 5;}
+    100%{transform: rotate(0deg) translateY(0px);opacity: 1;filter: blur(0px);scale: 1;}
+  } */
 
   .planet-img-geo {
     position: absolute;
@@ -389,6 +449,7 @@ main {
     text-align: left;
     margin-left: 0;
     margin-bottom: 1rem;
+    height: 180px;
   }
 
   .planet__menu {
@@ -455,7 +516,9 @@ main {
   .nav-container {
     flex-direction: row;
     align-items: center;
+    padding: 25px 25px 0 25px;
   }
+
   .nav__logo {
     margin-bottom: 0;
   }
@@ -529,6 +592,11 @@ main {
   .desktop-menu {
     max-width: 1000px;
   }
+
+  .nav-container {
+    padding: 25px 25px 0 25px;
+  }
+
   .stat {
     padding: 2rem;
   }

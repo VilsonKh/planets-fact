@@ -7,12 +7,16 @@
     <link href="https://fonts.googleapis.com/css?family=Antonio:100,200,300,regular,500,600,700" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@500&family=Spartan:wght@400;700&display=swap" rel="stylesheet" />
     <title>Planets fact site</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
     
     <script src="https://code.jquery.com/jquery-3.6.3.slim.min.js" integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script type="module" src="countUp.js"  defer></script>
+
     <script type='module' src="const.js" defer></script>
     <script type="module" src="animation.js" defer></script>
     <script type="module" src="main.js" defer></script>
@@ -109,7 +113,7 @@
       </nav>
     </header>
     <main class="main">
-      <div class="planet-container">
+      <div class="planet-container animate__animated">
         <img class="planet-img" src="img/planet-earth.svg" alt="" />
         <img class="planet-img-geo" src="img/geology-earth.png" alt="" />
       </div>
@@ -148,23 +152,35 @@
     <footer class="stats">
       <div class="stat stat__rotation">
         <p class="stat__name">ROTATION TIME</p>
-        <p class="stat__value rotation__value">1 Day</p>
+        <div class="value-container stat__value">
+          <span class="value rotation__value">1</span>
+          <p>Day</p>
+        </div>
       </div>
       <div class="stat stat__revolution">
         <p class="stat__name">REVOLUTION TIME</p>
-        <p class="stat__value revolution__value">365 Days</p>
+        <div class="value-container stat__value">
+          <span class="value revolution__value">365 </span>
+          <p> Days</p>
+        </div>
       </div>
       <div class="stat stat__radius">
         <p class="stat__name">RADIUS</p>
-        <p class="stat__value radius__value">6,371 KM</p>
+     <div class="value-container stat__value">
+          <span class="value radius__value">6371</span>
+          <p> KM</p>
+     </div>
       </div>
       <div class="stat stat__temp">
         <p class="stat__name">AVERAGE TEMP.</p>
-        <p class="stat__value average__value">16°C</p>
+        <div class="value-container stat__value">
+          <span class="value average__value">16</span>
+          <p>°C</p>
+        </div>
       </div>
     </footer>
 
     
-   
+    <script src="https://inorganik.github.io/countUp.js/dist/countUp.umd.js"></script>
   </body>
 </html>

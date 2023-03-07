@@ -1,3 +1,59 @@
+export function animateTitle() {
+  $(document).ready(function () {
+    let textWrapper = $(".planet__title");
+    textWrapper.html(textWrapper.text().replace(/\S/g, "<span class='letter'>$&</span>"));
+
+    anime.timeline({ loop: false }).add({
+      targets: ".planet__title .letter",
+      opacity: [0, 1],
+      easing: "easeInOutQuad",
+      duration: 500,
+      delay: (el, i) => 100 * (i + 1),
+    });
+  });
+}
+
+export function animateStats() {
+  const options = { duration: 1,separator: ',' };
+  let stats = $('.value')
+  for(let i = 0; i<stats.length;i++){
+    let value = $(stats[i]).html()
+    console.log(value)
+    let demo = new countUp.CountUp($(stats)[i], value, options);
+  if (!demo.error) {
+    demo.start();
+  } else {
+    console.error(demo.error);
+  }
+  
+  }
+}
+
+// Анимирует планеты
+export function animatePlanet(){
+  $('.planet-container').addClass('animate__pulse');
+  setTimeout(() => {
+    $('.planet-container').removeClass('animate__pulse')
+  }, 500);
+}
+
+export function animateBurgerMenuItems() {
+  anime({
+    targets: '.name-container',
+    translateX: 50,
+    easing: 'easeInOutSine',
+    direction: 'alternate',
+    duration: 500,
+    delay: (el, i) => 50 * i,
+    
+  });
+
+}
+
+function resetAnim(){
+  $(this).css('transform','none')
+}
+
 $(function () {
   //////////////////////////////
   // Создает и анимирует звезды//
@@ -89,7 +145,7 @@ $(function () {
     delay: (el, i) => 1000 * i,
     opacity: [
       {
-        duration: 100,
+        duration: 1000,
         value: "1",
       },
     ],
@@ -101,10 +157,11 @@ $(function () {
         value: "0px",
       },
     ],
-    translateX: 350,
+    //здесь было 350, поправил, чтобы не было совсем криво
+    translateX: 1000,
   });
 
-  // Анимация заголовка
-
   
+
+
 });

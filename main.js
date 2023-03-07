@@ -1,4 +1,5 @@
 import { planets } from "./const.js";
+import { animateTitle, animateStats, animatePlanet, animateBurgerMenuItems } from "./animation.js";
 
 $(function () {
   ////////////////////////
@@ -11,33 +12,7 @@ $(function () {
 
     $(this).addClass(currentPlanet).addClass("desktop-menu__active");
 
-    function animateTitle() {
-      $(document).ready(function () {
-        let textWrapper = $(".planet__title");
-        textWrapper.html(textWrapper.text().replace(/\S/g, "<span class='letter'>$&</span>"));
-
-        anime.timeline({ loop: false }).add({
-          targets: ".planet__title .letter",
-          opacity: [0, 1],
-          easing: "easeInOutQuad",
-          duration: 1000,
-          delay: (el, i) => 150 * (i + 1),
-        });
-      });
-    }
-
     animateTitle();
-
-    function animateNumbers() {
-      let numbers = $(".stat__value");
-      numbers.each(function (index) {
-        let value = $(numbers[index]).html();
-        var statisticAnimation = new CountUp(numbers[index], 0, value, 0, 5);
-        statisticAnimation.start();
-      });
-    }
-
-    animateNumbers()
 
     // Изменяет border color
     $(this).css("border-color", getPlanetColor());
@@ -53,8 +28,22 @@ $(function () {
     $(".radius__value").text(getPlanetRadius());
     // Изменяет average temp.
     $(".average__value").text(getPlanetTemp());
-    // Изменяет изображение планеты
-    $(".planet-img").attr("src", getPlanetImg());
+    // Изменяет изображение планеты добавляет анимацию планет
+    $(".planet-container").addClass("planetFlyOut");
+
+    setTimeout(() => {
+      $(".planet-container").removeClass("planetFlyOut");
+    }, 500);
+
+    setTimeout(() => {
+      $(".planet-img").attr("src", getPlanetImg());
+      $(".planet-container").addClass("planetFlyIn");
+    }, 500);
+
+    setTimeout(() => {
+      $(".planet-container").removeClass("planetFlyIn");
+    }, 1000);
+
     // Изменяет ссылку на Wiki
     $(".citation__link").attr("href", getPlanetUrl());
 
@@ -79,6 +68,14 @@ $(function () {
         if ($(planets)[i].name === currentPlanet) {
           return $(planets)[i].rotation;
         }
+
+        if (currentPlanet === "jupiter" || currentPlanet === "saturn" || currentPlanet === "uranus" || currentPlanet === "neptune") {
+          $(".rotation__value").next().text("Hours");
+        } else if (currentPlanet === "earth") {
+          $(".rotation__value").next().text("Day");
+        } else {
+          $(".rotation__value").next().text("Days");
+        }
       }
     }
 
@@ -86,6 +83,12 @@ $(function () {
       for (let i = 0; i < $(planets).length; i++) {
         if ($(planets)[i].name === currentPlanet) {
           return $(planets)[i].revolution;
+        }
+
+        if (currentPlanet === "mercury" || currentPlanet === "venus" || currentPlanet === "earth") {
+          $(".revolution__value").next().text("Days");
+        } else {
+          $(".revolution__value").next().text("Years");
         }
       }
     }
@@ -121,15 +124,21 @@ $(function () {
         }
       }
     }
+
     $(".planet__menu-content >li").removeClass("planet__menu-active");
     $(".planet__menu-content >li:first-child").addClass("planet__menu-active");
     $(".planet-img-geo").css("display", "none");
-  });
 
-  // Меню планет
+    animateStats();
+  });
+  /////////////////////////////////////////////
+  // Меню планет overview, structure, surface//
+  /////////////////////////////////////////////
   $(".planet__menu-content > li").click(function (evt) {
     $(".planet__menu-content >li").removeClass("planet__menu-active");
     $(this).addClass("planet__menu-active");
+
+    animatePlanet();
 
     if ($(this).children("p").text().indexOf("overview") >= 0) {
       $(".planet__paragraph").text(getOverviewParagraph());
@@ -226,15 +235,22 @@ $(function () {
   $(".nav__mobile-burger").click(function () {
     $(".menu-burger").toggle();
     $(".mobile__menu-content").toggle();
+    animateBurgerMenuItems();
+    $('.main').toggle()
+    $('.stats').toggle()
+
   });
 
-  ///////////////////////
-  // Изменение контента//
-  ///////////////////////
+  ////////////////////////////////////////
+  // Изменение контента мобильной версии//
+  ////////////////////////////////////////
   $(".menu_item").click(function (evt) {
     let currentPlanet = $(this).find("p").text();
-    console.log(currentPlanet);
-
+    $(".mobile__menu-content").show();
+    $('.main').show()
+    $('.stats').show()
+    animateTitle();
+    animateStats();
     // Изменяет заголовок
     $(".planet__title").text(currentPlanet);
     // Измененяет параграф
@@ -248,17 +264,21 @@ $(function () {
     // Изменяет average temp.
     $(".average__value").text(getPlanetTemp());
     // Изменяет изображение планеты
-    $(".planet-img").attr("src", getPlanetImg());
+    $(".planet-container").addClass("planetFlyOut");
+    setTimeout(() => {
+      $(".planet-container").removeClass("planetFlyOut");
+    }, 500);
+
+    setTimeout(() => {
+      $(".planet-img").attr("src", getPlanetImg());
+      $(".planet-container").addClass("planetFlyIn");
+    }, 500);
+
+    setTimeout(() => {
+      $(".planet-container").removeClass("planetFlyIn");
+    }, 1000);
     // Изменяет ссылку на Wiki
     $(".citation__link").attr("href", getPlanetUrl());
-
-    function getPlanetColor() {
-      for (let i = 0; i < $(planets).length; i++) {
-        if ($(planets)[i].name === currentPlanet) {
-          return $(planets)[i].underlineColor;
-        }
-      }
-    }
 
     function getPlanetContent() {
       for (let i = 0; i < $(planets).length; i++) {
@@ -273,6 +293,14 @@ $(function () {
         if ($(planets)[i].name === currentPlanet) {
           return $(planets)[i].rotation;
         }
+
+        if (currentPlanet === "jupiter" || currentPlanet === "saturn" || currentPlanet === "uranus" || currentPlanet === "neptune") {
+          $(".rotation__value").next().text("Hours");
+        } else if (currentPlanet === "earth") {
+          $(".rotation__value").next().text("Day");
+        } else {
+          $(".rotation__value").next().text("Days");
+        }
       }
     }
 
@@ -280,6 +308,12 @@ $(function () {
       for (let i = 0; i < $(planets).length; i++) {
         if ($(planets)[i].name === currentPlanet) {
           return $(planets)[i].revolution;
+        }
+
+        if (currentPlanet === "mercury" || currentPlanet === "venus" || currentPlanet === "earth") {
+          $(".revolution__value").next().text("Days");
+        } else {
+          $(".revolution__value").next().text("Years");
         }
       }
     }
@@ -317,12 +351,15 @@ $(function () {
     }
 
     $(".menu-burger").toggle();
+  
   });
 
   // Изменение контента (моб меню)
   $(".content-link").click(function () {
     $(".content-link").removeClass("link-active");
     $(this).addClass("link-active");
+
+    animatePlanet();
 
     if ($(this).text().indexOf("overview") >= 0) {
       $(".planet__paragraph").text(getOverviewParagraph());
@@ -412,5 +449,26 @@ $(function () {
         }
       }
     }
+
+    
   });
+
+  $(window).resize(function () {
+   
+    
+
+    // if ($(".mobile__menu-content").hide()) {
+    //   $(".mobile__menu-content").css("display", "flex");
+    // }
+  });
+
+  $(document).ready(function (){
+    $(".planet-container").addClass("planetFlyIn");
+
+    setTimeout(() => {
+      $(".planet-container").removeClass("planetFlyIn");
+    }, 1000);
+
+    animateStats()
+  })
 });
