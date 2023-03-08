@@ -1,5 +1,8 @@
 import { planets } from "./const.js";
-import { animateTitle, animateStats, animatePlanet, animateBurgerMenuItems } from "./animation.js";
+import { animateTitle, animateStats, animatePlanet, animateBurgerMenuItems, flyIn, flyOut} from "./animation.js";
+import { currentPlanet } from "../../../planets_facts/globals.js";
+
+
 
 $(function () {
   ////////////////////////
@@ -10,7 +13,9 @@ $(function () {
 
     $(".desktop-menu > li").css("border-color", "transparent").removeClass("desktop-menu__active");
 
-    $(this).addClass(currentPlanet).addClass("desktop-menu__active");
+    $(this).addClass(currentPlanet).addClass("desktop-menu__active")
+
+   
 
     animateTitle();
 
@@ -29,20 +34,29 @@ $(function () {
     // Изменяет average temp.
     $(".average__value").text(getPlanetTemp());
     // Изменяет изображение планеты добавляет анимацию планет
-    $(".planet-container").addClass("planetFlyOut");
+    
+    //$(".planet-container").addClass("planetFlyOut");
+
+    // setTimeout(() => {
+    //   $(".planet-container").removeClass("planetFlyOut");
+    // }, 500);
+
+    // setTimeout(() => {
+    //   $(".planet-img").attr("src", getPlanetImg());
+    //   $(".planet-container").addClass("planetFlyIn");
+    // }, 500);
+
+    // setTimeout(() => {
+    //   $(".planet-container").removeClass("planetFlyIn");
+    // }, 1000);
+    flyOut()
 
     setTimeout(() => {
-      $(".planet-container").removeClass("planetFlyOut");
+      $(".planet-img").attr("src", getPlanetImg());    
+    flyIn()
     }, 500);
 
-    setTimeout(() => {
-      $(".planet-img").attr("src", getPlanetImg());
-      $(".planet-container").addClass("planetFlyIn");
-    }, 500);
-
-    setTimeout(() => {
-      $(".planet-container").removeClass("planetFlyIn");
-    }, 1000);
+    
 
     // Изменяет ссылку на Wiki
     $(".citation__link").attr("href", getPlanetUrl());
@@ -136,7 +150,8 @@ $(function () {
   /////////////////////////////////////////////
   $(".planet__menu-content > li").click(function (evt) {
     $(".planet__menu-content >li").removeClass("planet__menu-active");
-    $(this).addClass("planet__menu-active");
+    //$(this).addClass("planet__menu-active")
+    $(this).addClass(`${currentPlanet}`);
 
     animatePlanet();
 
@@ -351,7 +366,9 @@ $(function () {
     }
 
     $(".menu-burger").toggle();
-  
+    $(".content-link").removeClass("link-active");
+    $(".content-link:first-child").addClass("link-active");
+    $(".planet-img-geo").css("display", "none");
   });
 
   // Изменение контента (моб меню)
@@ -463,12 +480,16 @@ $(function () {
   });
 
   $(document).ready(function (){
-    $(".planet-container").addClass("planetFlyIn");
+    // $(".planet-container").addClass("planetFlyIn");
 
-    setTimeout(() => {
-      $(".planet-container").removeClass("planetFlyIn");
-    }, 1000);
+    // setTimeout(() => {
+    //   $(".planet-container").removeClass("planetFlyIn");
+    // }, 1000);
+    flyIn()
 
     animateStats()
   })
+
+  
+
 });

@@ -18,8 +18,9 @@ body {
 
 .sky > div {
   position: absolute;
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.5), rgba(5, 63, 118, 1) 100%);
+/* background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.5), rgba(5, 63, 118, 1) 100%); */
   border-radius: 100%;
+  background-color: white;
 }
 
 .shootingstars {
@@ -300,6 +301,14 @@ main {
 
 .fixedScroll {
   overflow-y: hidden;
+}
+
+.background {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  z-index: 0;
 }
 
 @keyframes animateOut {
