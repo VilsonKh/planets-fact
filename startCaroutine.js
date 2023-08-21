@@ -16,10 +16,3 @@ $(function () {
 		animateTitle();
 	});
 });
-$(function () {
-	$(document).ready(function () {
-		flyIn();
-		animateStats();
-		animateTitle();
-	});
-});

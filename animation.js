@@ -70,7 +70,7 @@ export function flyIn() {
 		loop: false,
 	});
 }
-export function flyOut(target) {
+export function flyOut() {
 	anime({
 		targets: document.querySelector(".planet-img"),
 		translateX: [
