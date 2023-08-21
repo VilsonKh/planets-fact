@@ -1,26 +1,7 @@
 import { planets } from "./const.js";
 import { animateTitle, animateStats, animatePlanet, animateBurgerMenuItems, flyIn, flyOut } from "./animation.js";
 import "./helpers.js";
-import {
-	currentPlanet,
-	getGeologyImg,
-	getGeologyParagraph,
-	getGeologyUrl,
-	getOverviewImg,
-	getOverviewParagraph,
-	getOverviewUrl,
-	getPlanetColor,
-	getPlanetContent,
-	getPlanetImg,
-	getPlanetRadius,
-	getPlanetRevolution,
-	getPlanetRotationTime,
-	getPlanetTemp,
-	getPlanetUrl,
-	getStructureImg,
-	getStructureParagraph,
-	getStructureUrl,
-} from "./helpers.js";
+import { currentPlanet, getCurrentPlanetContent, getGeologyImg, getPlanetImg } from "./helpers.js";
 import "./startCaroutine.js";
 $(function () {
 	////////////////////////
@@ -32,36 +13,22 @@ $(function () {
 		$(".desktop-menu > li").css("border-color", "transparent").removeClass("desktop-menu__active");
 		$(this).addClass(currentPlanet.name).addClass("desktop-menu__active");
 
+		const currentData = getCurrentPlanetContent();
 		// Изменяет border color
-		$(this).css("border-color", getPlanetColor());
+		$(this).css("border-color", currentData.underlineColor);
 		// Изменяет заголовок
 		animateTitle();
 		// Измененяет параграф
-		$(".planet__paragraph").text(getPlanetContent());
+		$(".planet__paragraph").text(currentData.overview.content);
 		// Изменяет rotation time
-		$(".rotation__value").text(getPlanetRotationTime());
+		$(".rotation__value").text(currentData.rotation);
 		// Изменяет revolution time
-		$(".revolution__value").text(getPlanetRevolution());
+		$(".revolution__value").text(currentData.revolution);
 		// Изменяет radius
-		$(".radius__value").text(getPlanetRadius());
+		$(".radius__value").text(currentData.radius);
 		// Изменяет average temp.
-		$(".average__value").text(getPlanetTemp());
-		// Изменяет изображение планеты добавляет анимацию планет
+		$(".average__value").text(currentData.temperature);
 
-		//$(".planet-container").addClass("planetFlyOut");
-
-		// setTimeout(() => {
-		//   $(".planet-container").removeClass("planetFlyOut");
-		// }, 500);
-
-		// setTimeout(() => {
-		//   $(".planet-img").attr("src", getPlanetImg());
-		//   $(".planet-container").addClass("planetFlyIn");
-		// }, 500);
-
-		// setTimeout(() => {
-		//   $(".planet-container").removeClass("planetFlyIn");
-		// }, 1000);
 		flyOut();
 
 		setTimeout(() => {
@@ -70,10 +37,10 @@ $(function () {
 		}, 500);
 
 		// Изменяет ссылку на Wiki
-		$(".citation__link").attr("href", getPlanetUrl());
+		$(".citation__link").attr("href", currentData.overview.source);
 
-		$(".planet__menu-content >li").removeClass().addClass("planet__menu-item");
-		$(".planet__menu-content >li:first-child").addClass(`planet__menu-active ${currentPlanet.name}Color`);
+		$(".planet__menu > button").removeClass().addClass("planet__menu-button");
+		$(".planet__menu > button:first-child").addClass(`planet__menu-active ${currentPlanet.name}Color`);
 
 		$(".planet-img-geo").css("display", "none");
 
@@ -82,26 +49,28 @@ $(function () {
 	/////////////////////////////////////////////
 	// Меню планет overview, structure, surface//
 	/////////////////////////////////////////////
-	$(".planet__menu-content > li").click(function (e) {
-		$(".planet__menu-content > li").removeClass().addClass("planet__menu-item");
+	$(".planet__menu > button").click(function (e) {
+		$(".planet__menu > button").removeClass().addClass("planet__menu-button");
 		$(this).addClass(`planet__menu-active ${currentPlanet.name}Color`);
 
 		animatePlanet();
 
+		const currentData = getCurrentPlanetContent();
+
 		if ($(this).children("p").text().indexOf("overview") >= 0) {
-			$(".planet__paragraph").text(getOverviewParagraph());
-			$(".citation__link").attr("href", getOverviewUrl());
-			$(".planet-img").attr("src", getOverviewImg());
+			$(".planet__paragraph").text(currentData.overview.content);
+			$(".citation__link").attr("href", currentData.overview.source);
+			$(".planet-img").attr("src", currentData.images.planet);
 			$(".planet-img-geo").css("display", "none");
 		} else if ($(this).children("p").text().indexOf("structure") >= 0) {
-			$(".planet__paragraph").text(getStructureParagraph());
-			$(".citation__link").attr("href", getStructureUrl());
-			$(".planet-img").attr("src", getStructureImg());
+			$(".planet__paragraph").text(currentData.structure.content);
+			$(".citation__link").attr("href", currentData.structure.source);
+			$(".planet-img").attr("src", currentData.images.structure);
 			$(".planet-img-geo").css("display", "none");
 		} else if ($(this).children("p").text().indexOf("geology") >= 0) {
-			$(".planet__paragraph").text(getGeologyParagraph());
-			$(".citation__link").attr("href", getGeologyUrl());
-			$(".planet-img").attr("src", getOverviewImg());
+			$(".planet__paragraph").text(currentData.geology.content);
+			$(".citation__link").attr("href", currentData.geology.content);
+			$(".planet-img").attr("src", currentData.images.planet);
 			$(".planet-img-geo").css("display", "block").attr("src", getGeologyImg());
 		}
 	});

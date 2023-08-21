@@ -77,7 +77,7 @@ main {
   margin: 0 auto;
 }
 
-.planet__menu-content {
+.planet__menu {
   display: none;
 }
 
@@ -407,7 +407,7 @@ main {
     border-color: #2d68f0;
   } */
 
-  .planet__menu-content {
+  .planet__menu{
     display: block;
   }
 
@@ -465,10 +465,11 @@ main {
     flex-basis: 50%;
   }
 
-  .planet__menu-item {
+  .planet__menu-button {
     border: 1px solid #ffffff50;
     margin-bottom: 20px;
     display: flex;
+    width: 100%;
     align-items: center;
     padding: 0.75rem;
     cursor: pointer;
