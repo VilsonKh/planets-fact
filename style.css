@@ -137,6 +137,7 @@ main {
   line-height: 3.25rem;
   text-transform: uppercase;
   text-align: center;
+  min-height: 52px;
 }
 
 .letter {

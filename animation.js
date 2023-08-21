@@ -14,8 +14,6 @@ export function animateTitle() {
 	});
 }
 
-animateTitle();
-
 export function animateStats() {
 	const options = { duration: 1, separator: "," };
 	let stats = $(".value");
@@ -44,7 +42,7 @@ export function animateBurgerMenuItems() {
 		translateX: 50,
 		easing: "easeInOutSine",
 		direction: "alternate",
-		duration: 500,
+		duration: 300,
 		delay: (el, i) => 50 * i,
 	});
 }
