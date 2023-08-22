@@ -1,4 +1,4 @@
-import { animateTitle, animateStats, animatePlanet, animateBurgerMenuItems, flyIn, flyOut } from "./animation.js";
+import { animatePlanet, animateBurgerMenuItems, resetAnim } from "./animation.js";
 import "./helpers.js";
 import { changePlanetData, changePlanetDescription, currentPlanet, getCurrentPlanetContent } from "./helpers.js";
 import "./startCaroutine.js";
@@ -8,7 +8,8 @@ import "./startCaroutine.js";
 /////////////////////////////
 
 export function onBurgerMenuClick() {
-	$(".menu-burger").toggle();
+	resetAnim(".burgerMenu__item-inner");
+	$(".burgerMenu").toggle();
 	$(".mobile__menu-content").toggle();
 	animateBurgerMenuItems();
 	$(".main").toggle();
@@ -24,11 +25,12 @@ export function onDesktopMenuClick() {
 	const currentData = getCurrentPlanetContent();
 
 	//desktop///////
-	$(".desktop-menu > li").css("border-color", "transparent").removeClass("desktop-menu__active");
+	$(".desktopMenu > li").css("border-color", "transparent").removeClass("active");
 	$(this).css("border-color", currentData.underlineColor);
-	$(this).addClass(currentPlanet.name).addClass("desktop-menu__active");
+	$(this).addClass(currentPlanet.name).addClass("active");
+	$(".planet-img-geo").attr("src", "");
 	$(".planet__menu > button").removeClass().addClass("planet__menu-button");
-	$(".planet__menu > button:first-child").addClass(`planet__menu-active ${currentPlanet.name}Color`);
+	$(".planet__menu > button:first-child").addClass(`active ${currentPlanet.name}Color`);
 	///////////////
 	changePlanetData();
 }
@@ -39,15 +41,14 @@ export function onDesktopMenuClick() {
 
 export function onMobileMenuClick() {
 	currentPlanet.name = $(this).attr("data-planet");
-
-	// mobile ///////////
+	const currentData = getCurrentPlanetContent();
 	$(".mobile__menu-content").show();
 	$(".main").show();
 	$(".stats").show();
-	$(".menu-burger").toggle();
-	$(".content-link").removeClass("link-active");
-	$(".content-link:first-child").addClass("link-active");
-	/////////////////////
+	$(".burgerMenu").toggle();
+	$(".mobile__menu-link").removeClass("active").css("border-color", "transparent");
+	$(".mobile__menu-link:first-child").addClass("active").css("border-color", currentData.underlineColor);
+	$(".planet-img-geo").attr("src", "");
 
 	changePlanetData();
 }
@@ -58,24 +59,26 @@ export function onMobileMenuClick() {
 
 export function onPlanetMenuClick() {
 	$(".planet__menu > button").removeClass().addClass("planet__menu-button");
-	$(this).addClass(`planet__menu-active ${currentPlanet.name}Color`);
+	$(this).addClass(`active ${currentPlanet.name}Color`);
 
 	animatePlanet();
 
 	const currentData = getCurrentPlanetContent();
 
-	changePlanetDescription($(this).attr("id"));
+	changePlanetDescription($(this).attr("data-menu"));
 }
 
-// Изменение контента (моб меню)
+//////////////////////////////////////////////////////////////
+// Меню планет overview, structure, surface мобильной версии//
+/////////////////////////////////////////////////////////////
 
 export function onMobilePlanetMenuClick() {
 	const currentData = getCurrentPlanetContent();
-	$(".content-link").removeClass();
-	$(".mobile__menu-content > li").addClass("content-link").css("border-color", "transparent");
-	$(this).css("border-color", currentData.underlineColor).addClass(`link-active`);
+	$(".mobile__menu-link").removeClass();
+	$(".mobile__menu-content > li").addClass("mobile__menu-link").css("border-color", "transparent");
+	$(this).css("border-color", currentData.underlineColor).addClass(`active`);
 
 	animatePlanet();
 
-	changePlanetDescription($(this).attr("id"));
+	changePlanetDescription($(this).attr("data-menu"));
 }

@@ -1,13 +1,18 @@
-import { animateStats, animateTitle, flyIn } from "./animation.js";
+import { animateStats, animateTitle, createWish, flyIn, showStars, shuffleSky } from "./animation.js";
 import { currentPlanet } from "./helpers.js";
 import { onBurgerMenuClick, onDesktopMenuClick, onMobileMenuClick, onMobilePlanetMenuClick, onPlanetMenuClick } from "./main.js";
 
 $(".planet__menu > button:first-child").addClass(`${currentPlanet.name}Color`);
-$(".desktop-menu > li").click(onDesktopMenuClick);
+$(".desktopMenu > li").click(onDesktopMenuClick);
 $(".planet__menu > button").click(onPlanetMenuClick);
-$(".nav__mobile-burger").click(onBurgerMenuClick);
-$(".menu_item").click(onMobileMenuClick);
-$(".content-link").click(onMobilePlanetMenuClick);
+$(".burgerMenu__icon").click(onBurgerMenuClick);
+$(".burgerMenu__item").click(onMobileMenuClick);
+$(".mobile__menu-link").click(onMobilePlanetMenuClick);
+
+window.addEventListener("resize", shuffleSky);
+
+showStars(60, 7);
+createWish(60);
 
 $(function () {
 	$(document).ready(function () {
