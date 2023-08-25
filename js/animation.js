@@ -8,27 +8,23 @@ const wishArray = [];
 // Animate sky elements
 
 export function createStars(starsNumber, size) {
-	for (let i = 0; i <= starsNumber; i++) {
+	for (let i = 0; i <= 150; i++) {
 		const star = document.createElement("div");
 		const chooseBlink = Math.floor(Math.random() * 5) + 1;
 		star.classList.add(`blink__${chooseBlink}`);
-		const param = randomNumber(size, "px");
+		const param = randomNumber(size, 0, "px");
 		star.style.height = star.style.width = param;
 		star.style.opacity = Math.round(Math.random() * (1 - 0.2) * 100) / 100;
 		star.style.animationDuration = `${Math.floor(Math.random() * (5 - 2)) + 2}s`;
-		star.style.left = randomNumber(window.innerWidth, "px");
-		star.style.top = randomNumber(window.innerHeight, "px");
-		starsArray.push(star);
-		// sky.appendChild(star);}
+		star.style.left = randomNumber(60, 5, "px");
+		star.style.top = randomNumber(60, 5, "px");
+		const starContainer = document.createElement("div");
+		starContainer.append(star);
+		starsArray.push(starContainer);
 	}
 }
 
 export function shuffleSky() {
-	starsArray.forEach((star) => {
-		star.style.top = randomNumber(window.innerHeight, "px");
-		star.style.left = randomNumber(window.innerWidth, "px");
-	});
-
 	wishArray.forEach((wish) => {
 		wish.style.top = randomNumber(window.innerHeight, "px");
 		wish.style.left = randomNumber(window.innerWidth, "px");
@@ -36,29 +32,27 @@ export function shuffleSky() {
 }
 
 export function showStars(stars, size) {
-	// while (starsArray.length < 60) {
-	// 	createStars(5, size);
-	// 	if (starsArray.length > 2) {
-	// 		console.log(starsArray.length);
-	// 		thinOutArray();
-	// 	}
-	// }
-
-	console.log(starsArray);
+	createStars(stars, size);
 
 	starsArray.forEach((star) => sky.append(star));
 }
 
-export function randomNumber(range, unit) {
-	let randNum = Math.floor(Math.random() * range) + 1;
+export function randomNumber(range, min = 0, unit) {
+	let randNum = null;
+	if (min === 0) {
+		randNum = Math.floor(Math.random() * range) + 1;
+	} else {
+		randNum = Math.floor(Math.random() * (range - min + 1) + min);
+	}
+
 	return `${randNum}${unit}`;
 }
 
 export function createWish(quantity) {
 	for (let i = 0; i < quantity; i++) {
 		const wish = document.createElement("div");
-		wish.style.left = randomNumber(window.innerWidth, "px");
-		wish.style.top = randomNumber(window.innerHeight, "px");
+		wish.style.left = randomNumber(window.innerWidth, 0, "px");
+		wish.style.top = randomNumber(window.innerHeight, 0, "px");
 		shootingStars.appendChild(wish);
 		wishArray.push(wish);
 	}
@@ -116,7 +110,7 @@ export function animateStats() {
 	}
 }
 
-// Animate planets
+// Animate planets on planet menu click
 export function animatePlanet() {
 	$(".planet-img").addClass("animate__pulse");
 	$(".planet-img-geo").addClass("animate__pulse");
@@ -132,7 +126,7 @@ export function animateBurgerMenuItems() {
 		targets: ".burgerMenu__item-inner",
 		translateX: [
 			{ value: -200, duration: 0, delay: 0 },
-			{ value: 0, duration: 1000, delay: anime.stagger(100) },
+			{ value: 0, duration: 700, delay: anime.stagger(80) },
 		],
 	});
 }
@@ -155,7 +149,7 @@ export function flyIn() {
 			{ value: 0, duration: 1000, delay: 0 },
 		],
 		scale: [
-			{ value: 4, duration: 100, delay: 0, easing: "easeOutExpo" },
+			{ value: 3, duration: 100, delay: 0, easing: "easeOutExpo" },
 			{ value: 1, duration: 900 },
 		],
 		easing: "easeOutElastic(1, .8)",
@@ -169,7 +163,7 @@ export function flyOut() {
 		targets: document.querySelector(".planet-img"),
 		translateX: [
 			{ value: 0, duration: 0, delay: 0 },
-			{ value: 200, duration: 1000, delay: 0 },
+			{ value: -200, duration: 1000, delay: 0 },
 		],
 
 		scale: [{ value: 0, duration: 200, delay: 0, easing: "easeOutExpo" }],
@@ -222,20 +216,40 @@ export function flyOut() {
 
 ///////////// --- TEST WITH ARRAY OF STARS --- ////////////////
 // function thinOutArray() {
-// 	for (let i = 0; i < starsArray.length - 1; i++) {
+// 	while (starsArray.length < 20) {
+// 		for (let i = 0; i < starsArray.length - 1; i++) {
+// 			const coordinateX = (index) => starsArray[index].style.top.slice(0, starsArray[index].style.top.length - 2);
+// 			const coordinateY = (index) => starsArray[index].style.left.slice(0, starsArray[index].style.left.length - 2);
+
+// 			for (let e = i + 1; e < starsArray.length; e++) {
+// 				if (Math.abs(coordinateX(i) - coordinateX(e)) >= 40 && Math.abs(coordinateY(i) - coordinateY(e)) >= 40) {
+// 					console.log("подходит", coordinateX(i), coordinateX(e));
+// 				} else {
+// 					console.log("не подходит", coordinateX(i), coordinateX(e));
+// 					starsArray.splice(e, 1);
+// 					createStars(1, 7);
+// 					console.log(starsArray);
+// 					thinOutArray();
+// 				}
+// 			}
+
+// 			console.log(starsArray);
+// 		}
+// 	}
+// }
+// [1,2,3,4,5,6,7,8,9,10]
+// function thinOutArrayByOne() {
+// 	console.log("я в функиции");
+// 	console.log(starsArray);
+// 	for (let i = starsArray.length - 1; i > 0; i--) {
 // 		const coordinateX = (index) => starsArray[index].style.top.slice(0, starsArray[index].style.top.length - 2);
 // 		const coordinateY = (index) => starsArray[index].style.left.slice(0, starsArray[index].style.left.length - 2);
-
-// 		for (let e = i + 1; e < starsArray.length; e++) {
-// 			if (Math.abs(coordinateX(i) - coordinateX(e) || coordinateY(i) - coordinateY(e)) >= 20) {
-// 				console.log("подходит", coordinateX(i), coordinateX(e));
-// 			} else {
-// 				console.log("не подходит", coordinateX(i), coordinateX(e));
-// 				starsArray.splice(e, 1);
-// 				// thinOutArray();
-// 			}
+// 		if (Math.abs(coordinateX(i - 1) - coordinateX(i)) >= 80 && Math.abs(coordinateY(i - 1) - coordinateY(i))) {
+// 			console.log("подходит by single", " по Х", coordinateX(i), coordinateX(i - 1), " по У ", coordinateY(i), coordinateY(i - 1));
+// 		} else {
+// 			console.log("не подходит by single", " по Х", coordinateX(i), coordinateX(i - 1), " по У ", coordinateY(i), coordinateY(i - 1));
+// 			starsArray.splice(i, 1);
+// 			// thinOutArray();
 // 		}
-
-// 		console.log(starsArray);
 // 	}
 // }
