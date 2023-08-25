@@ -4,7 +4,11 @@ body {
 	line-height: 1.5rem;
 	color: white;
 	min-width: 320px;
-	max-width: 1920px;
+	max-width: 1440px;
+	margin: 0 auto;
+}
+
+main {
 	margin: 0 auto;
 }
 
@@ -44,10 +48,7 @@ body {
 	display: none;
 }
 
-main {
-	max-width: 90%;
-	margin: 0 auto;
-}
+
 
 .planet__menu {
 	display: none;
@@ -77,10 +78,6 @@ main {
 	opacity: 1;
 }
 
-.mobile__menu-link:hover {
-	opacity: 1;
-}
-
 .planet {
 	height: 400px;
 	display: flex;
@@ -88,6 +85,7 @@ main {
 	align-items: center;
 	position: relative;
   overflow: hidden;
+	align-self: center;
 }
 .planet-img {
 	max-height: 40%;
@@ -378,13 +376,6 @@ main {
 		display: block;
 	}
 
-	.planet-img-geo {
-		position: absolute;
-		top: 60%;
-		max-height: 30%;
-		display: none;
-	}
-
 	.planet__section {
 		display: flex;
 	}
@@ -469,7 +460,6 @@ main {
 	.nav-container {
 		flex-direction: row;
 		align-items: center;
-		padding: 25px 25px 0 25px;
 	}
 
 	.nav__logo {
@@ -502,15 +492,12 @@ main {
 
 	.planet {
     overflow: initial;
-		flex-basis: 40%;
 		position: relative;
+		flex-basis: 50%;
 	}
 
 	.planet-img-geo {
-		position: absolute;
-		top: 60%;
 		max-height: 40%;
-		display: none;
 	}
 
 	.planet-img {
