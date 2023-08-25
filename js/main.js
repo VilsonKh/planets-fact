@@ -3,10 +3,7 @@ import "./helpers.js";
 import { changePlanetData, changePlanetDescription, currentPlanet, getCurrentPlanetContent } from "./helpers.js";
 import "./startCaroutine.js";
 
-/////////////////////////////
-// Открытие мобильного меню//
-/////////////////////////////
-
+// Opens burger menu
 export function onBurgerMenuClick() {
 	resetAnim(".burgerMenu__item-inner");
 	$(".burgerMenu").toggle();
@@ -16,29 +13,23 @@ export function onBurgerMenuClick() {
 	$(".stats").toggle();
 }
 
-////////////////////////
-// Переключает планеты//
-////////////////////////
+// Changes desktop content
 export function onDesktopMenuClick() {
 	currentPlanet.name = $(this).attr("data-planet");
 
 	const currentData = getCurrentPlanetContent();
 
-	//desktop///////
 	$(".desktopMenu > li").css("border-color", "transparent").removeClass("active");
 	$(this).css("border-color", currentData.underlineColor);
 	$(this).addClass(currentPlanet.name).addClass("active");
 	$(".planet-img-geo").attr("src", "");
 	$(".planet__menu > button").removeClass().addClass("planet__menu-button");
 	$(".planet__menu > button:first-child").addClass(`active ${currentPlanet.name}Color`);
-	///////////////
+
 	changePlanetData();
 }
 
-////////////////////////////////////////
-// Изменение контента мобильной версии//
-////////////////////////////////////////
-
+// Changes mobile content
 export function onMobileMenuClick() {
 	currentPlanet.name = $(this).attr("data-planet");
 	const currentData = getCurrentPlanetContent();
@@ -53,25 +44,17 @@ export function onMobileMenuClick() {
 	changePlanetData();
 }
 
-/////////////////////////////////////////////
-// Меню планет overview, structure, surface//
-/////////////////////////////////////////////
-
+// Changes data on the page by clicking on the planet menu
 export function onPlanetMenuClick() {
 	$(".planet__menu > button").removeClass().addClass("planet__menu-button");
 	$(this).addClass(`active ${currentPlanet.name}Color`);
 
 	animatePlanet();
 
-	const currentData = getCurrentPlanetContent();
-
 	changePlanetDescription($(this).attr("data-menu"));
 }
 
-//////////////////////////////////////////////////////////////
-// Меню планет overview, structure, surface мобильной версии//
-/////////////////////////////////////////////////////////////
-
+// Changes data on the mobile page by clicking on the planet menu
 export function onMobilePlanetMenuClick() {
 	const currentData = getCurrentPlanetContent();
 	$(".mobile__menu-link").removeClass();

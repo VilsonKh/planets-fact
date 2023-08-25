@@ -1,4 +1,4 @@
-import { animateStats, animateTitle, createWish, flyIn, showStars, shuffleSky } from "./animation.js";
+import { animateStats, animateTitle, createStars, createWish, flyIn, shuffleSky } from "./animation.js";
 import { currentPlanet } from "./helpers.js";
 import { onBurgerMenuClick, onDesktopMenuClick, onMobileMenuClick, onMobilePlanetMenuClick, onPlanetMenuClick } from "./main.js";
 
@@ -11,7 +11,7 @@ $(".mobile__menu-link").click(onMobilePlanetMenuClick);
 
 window.addEventListener("resize", shuffleSky);
 
-showStars(60, 7);
+createStars(150, 7);
 createWish(60);
 
 $(function () {
