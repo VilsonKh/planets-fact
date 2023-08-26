@@ -16,7 +16,6 @@ main {
 	position: relative;
 	z-index: 1;
 	background: #070724;
-	max-width: 1920px;
 }
 
 .nav-container {
@@ -169,8 +168,7 @@ main {
 
 	margin-bottom: 10px;
 }
-.stat__rotation {
-}
+
 .stats__name {
 	font-weight: bold;
 	font-size: 0.5rem;
@@ -277,18 +275,6 @@ main {
 
 .planetFlyIn {
 	animation: animateIn 0.3s linear forwards;
-}
-
-.fixedScroll {
-	overflow-y: hidden;
-}
-
-.background {
-	position: absolute;
-	display: block;
-	top: 0;
-	left: 0;
-	z-index: 0;
 }
 
 @keyframes animateOut {
@@ -445,7 +431,6 @@ main {
 	.stats__item {
 		display: flex;
 		flex-direction: column;
-
 		width: 100%;
 		padding: 0.75rem 0 0.75rem 0.5rem;
 	}
@@ -462,7 +447,7 @@ main {
 @media (min-width: 1023px) {
 	.nav-container {
 		flex-direction: row;
-		align-items: center;
+		align-items: flex-start;
 	}
 
 	.nav__logo {
