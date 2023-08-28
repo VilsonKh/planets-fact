@@ -1,30 +1,36 @@
 import { currentPlanet } from "./helpers.js";
 
-const sky = document.querySelector(".sky");
 const shootingStars = document.querySelector(".shootingstars");
 const wishArray = [];
-
 // Animate sky elements
 /** Function creates containers, append star, adds class for blinking animation keyframes
  *  and over dynamic styles. Finally pushes item into sky container.
 	@param {number} starsNumber - amount of containers
-	@param {number} size - star max size
+	@param {number} maxStarSize - star max size
+	@param {number} minStarSize - star min size
+	@param {number} maxStarOpacity - star max opacity
+	@param {number} minStarOpacity - star min opacity
+	@param {number} maxAnimDuration - max blink animation time
+	@param {number} minAnimDuration - min blink animation time
 	@return {void} nothing
 */
-export function createStars(starsNumber, size) {
-	for (let i = 0; i <= starsNumber; i++) {
+export function createStars(starsConfig) {
+	const { starsNumber, maxStarSize, minStarSize, maxStarOpacity, minStarOpacity, maxAnimDuration, minAnimDuration } = starsConfig;
+	//for tests
+	const sky = document.querySelector(".sky");
+	for (let i = 1; i <= starsNumber; i++) {
 		const star = document.createElement("div");
 		// generates random number from 1 - 5
 		const chooseBlink = Math.floor(Math.random() * 5) + 1;
 		star.classList.add(`blink__${chooseBlink}`);
-		const param = randomNumber(size, 0, "px");
+		const param = `${randomNumber(maxStarSize, minStarSize)}px`;
 		star.style.height = star.style.width = param;
 		// generates random opacity from 0.2 to 1
-		star.style.opacity = Math.round(Math.random() * (1 - 0.2) * 100) / 100;
+		star.style.opacity = randomNumber(maxStarOpacity, minStarOpacity);
 		// generates random animation duration from 2 - 5
-		star.style.animationDuration = `${Math.floor(Math.random() * (5 - 2)) + 2}s`;
-		star.style.left = randomNumber(60, 5, "px");
-		star.style.top = randomNumber(60, 5, "px");
+		star.style.animationDuration = `${randomNumber(maxAnimDuration, minAnimDuration)}s`;
+		star.style.left = `${randomNumber(60, 5)}px`;
+		star.style.top = `${randomNumber(60, 5)}px`;
 		const starContainer = document.createElement("div");
 		starContainer.append(star);
 		sky.append(starContainer);
@@ -39,21 +45,19 @@ export function shuffleSky() {
 	});
 }
 
-/** Function creates random star size or star position
+/** Function creates random star size, opacity or positon in a range
  * @param {number} max - max value
  * @param {number} min - min value
- * @param {string} unit - units like 'px'
- * @return {string} size or postion like "63px"
+ * @return {number} size or postion like "63"
  */
-export function randomNumber(max, min, unit) {
+export function randomNumber(max, min) {
 	let randNum = null;
-	if (min === 0) {
-		randNum = Math.floor(Math.random() * max) + 1;
+	if (min < 1) {
+		randNum = Math.round((Math.random() * (max - min) + min) * 100) / 100;
 	} else {
 		randNum = Math.floor(Math.random() * (max - min + 1) + min);
 	}
-
-	return `${randNum}${unit}`;
+	return randNum;
 }
 
 /** Function creates a certain quantity of wishes and animate them with anime.js
@@ -62,8 +66,8 @@ export function randomNumber(max, min, unit) {
 export function createWish(quantity) {
 	for (let i = 0; i < quantity; i++) {
 		const wish = document.createElement("div");
-		wish.style.left = randomNumber(window.innerWidth, 0, "px");
-		wish.style.top = randomNumber(window.innerHeight, 0, "px");
+		wish.style.left = `${randomNumber(window.innerWidth, 0)}px`;
+		wish.style.top = `${randomNumber(window.innerHeight, 0)}px`;
 		shootingStars.appendChild(wish);
 		wishArray.push(wish);
 	}
@@ -93,7 +97,7 @@ export function createWish(quantity) {
 
 // Animate planet's name
 export function animateTitle() {
-	$(document).ready(function () {
+	$(function () {
 		let textWrapper = $(".planet__title");
 		textWrapper.html(currentPlanet.name.replace(/\S/g, "<span class='letter'>$&</span>"));
 		anime.timeline({ loop: false }).add({

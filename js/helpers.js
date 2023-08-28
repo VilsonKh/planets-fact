@@ -26,7 +26,7 @@ export function getCurrentPlanetContent() {
  * @param {string} statsName -  stat name like rotation, revolution, radius
  * @returns {string} measure unit
  */
-function chooseRevolutionMeasure(planetName, statsName) {
+export function chooseRevolutionMeasure(planetName, statsName) {
 	let measure = null;
 
 	if (statsName === "revolution") {
@@ -87,7 +87,6 @@ export function changePlanetData() {
  */
 export function changePlanetDescription(textKey) {
 	const currentData = getCurrentPlanetContent();
-	console.log(textKey);
 	$(".planet__paragraph").text(currentData[textKey]["content"]);
 	$(".planet__wikiLink-link").attr("href", currentData[textKey]["content"]);
 	if (textKey === "structure") {
