@@ -7,3 +7,5 @@ export const starsConfig = {
 	maxAnimDuration: 5,
 	minAnimDuration: 2,
 };
+
+export const wishAmout = 60;

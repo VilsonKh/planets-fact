@@ -76,7 +76,6 @@ describe("shuffleSky function", () => {
 		wishArray.push(wish);
 
 		const initialValue = wishArray[0].style.top;
-		console.log(initialValue);
 		shuffleSky(wishArray);
 
 		wishArray.forEach((wish) => {

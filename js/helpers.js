@@ -8,7 +8,6 @@ export const currentPlanet = {
 	},
 	set name(inputName) {
 		this.planetName = inputName;
-		console.log("Current planet is " + this.planetName);
 	},
 };
 
