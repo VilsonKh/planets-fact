@@ -81,7 +81,6 @@ main {
 	justify-content: center;
 	align-items: center;
 	position: relative;
-	overflow: hidden;
 	align-self: center;
 }
 .planet-img {
