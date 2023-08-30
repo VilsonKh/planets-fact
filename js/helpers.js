@@ -87,7 +87,7 @@ export function changePlanetData() {
 export function changePlanetDescription(textKey) {
 	const currentData = getCurrentPlanetContent();
 	$(".planet__paragraph").text(currentData[textKey]["content"]);
-	$(".planet__wikiLink-link").attr("href", currentData[textKey]["content"]);
+	$(".planet__wikiLink-link").attr("href", currentData[textKey]["source"]);
 	if (textKey === "structure") {
 		$(".planet-img").attr("src", currentData.images.structure);
 	} else {
