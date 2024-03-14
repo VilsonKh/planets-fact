@@ -2,7 +2,7 @@
 
 Planets Facts project dedicated to fascinating facts about the planets of our solar system. Here, you can discover captivating details about each planet, their unique features.
 
-The **Planets Facts website** can be accessed via [this link](https://vilsonkh.github.io/planets-fact/)
+The **Planets Facts website** can be accessed via [this link](https://projects.devilson.me/planets-facts)
 
 ## Project Functionality
 
